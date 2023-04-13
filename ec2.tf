@@ -31,7 +31,7 @@ resource "aws_subnet" "my_subnet_b" {
   cidr_block = "10.0.2.0/24"
   
   tags = {
-    Name = "web-subnet-b"
+    Name = "web-subnet- b"
   }
 }
 
