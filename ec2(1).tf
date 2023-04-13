@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "us-west-2"
 }
 
 resource "aws_vpc" "my_vpc" {
@@ -93,15 +93,21 @@ resource "aws_security_group" "web_sg" {
   }
 }
 
+resource "aws_key_pair" "my_key_pair" {
+  key_name   = "my-key-pair-1"
+  public_key = file("~/.ssh/id_rsa.pub")
+}
+
 resource "aws_instance" "my_instance_1" {
-  ami           = "ami-006e00d6ac75d2ebb"
+  ami           = "ami-0fcf52bcf5db7b003"
   instance_type = "t2.medium"
   subnet_id     = aws_subnet.my_subnet_b.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
-  key_name = "web-key"
+  key_name = "my-key-pair-1"
   associate_public_ip_address = true
   
   tags = {
-    Name = "web-instance-1"
+    Name = "web-instance-2"
   }
 }
+
